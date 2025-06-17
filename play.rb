@@ -1,5 +1,5 @@
 class Play
-  attr_accessor :wrong_arr, :correct_arr, :code
+  attr_accessor :wrong_arr, :correct_arr, :code, :draw
   # attr_reader :code
 
   def initialize
@@ -14,18 +14,18 @@ class Play
     @guess = gets.to_s.chomp
   end
 
-  def check_char
-    @code_arr = @code.split("").uniq!
+  def check_char (turn)
+    @code_arr = @code.split("")
+    @code_arr.uniq!
     if @code_arr.include?(@guess)
-      # puts "Good guess"
       @correct_arr << @guess
       @correct_arr.uniq!
-      # p @correct_arr
     else
-      # puts "Wrong guess"
+      puts "#{turn} attemts"
+      # puts "hangman : #{@draw.hangman[0]}"
+      @draw.hangman[turn] = @draw.hangman_parts[turn]
       @wrong_arr << @guess
       @wrong_arr.uniq!
-      # p @wrong_arr
     end
   end
 

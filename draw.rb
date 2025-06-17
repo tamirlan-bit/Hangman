@@ -2,9 +2,8 @@ class Draw
   attr_accessor :hangman, :hangman_parts, :play
 
   def initialize
-    @play = play
-    @hangman_parts = ["","┌───────┐","O","|","/","\\","/","\\"]
-    @hangman = ["","         "," "," "," "," "," "," "]
+    @hangman_parts = ["┌───────┐","O","|","/","\\","/","\\"]
+    @hangman = ["         "," "," "," "," "," "," "]
     
   end
 
@@ -16,10 +15,10 @@ class Draw
 
 ~~ The Hangman Game ~~
 
-     #{@hangman[1]}      | 
-     │       #{@hangman[2]}      |   Word: #{@secret}"
-     │      #{@hangman[4]}#{@hangman[3]}#{@hangman[5]}     |
-     │      #{@hangman[6]} #{@hangman[7]}     |   Wrong:\e[1m#{@wrong_guess}\e[0m
+     #{@hangman[0]}      | 
+     │       #{@hangman[1]}      |   Word: #{@secret}"
+     │      #{@hangman[3]}#{@hangman[2]}#{@hangman[4]}     |
+     │      #{@hangman[5]} #{@hangman[6]}     |   Wrong guesses: \e[1m#{@wrong_guess}\e[0m
      │              |
   ───┴───────       
 

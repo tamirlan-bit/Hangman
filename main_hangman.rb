@@ -5,24 +5,22 @@ play = Play.new
 draw = Draw.new
 play.draw = draw
 draw.play = play
-turn = 1
+
 
 draw.clear_screen
 draw.display
 while play.wrong_arr.size < 7 
   play.get_char
-  play.check_char(turn)
+  play.check_char
   draw.clear_screen
   draw.display
   if play.win?
     draw.clear_screen
     draw.display
-    puts "you WON!!!!!!!!!!!"
+    puts "\e[1mYou WON! 🎉\e[0m"
     exit
-  end
-  turn += 1
+  end  
 end
-puts "Game Over!!!!!!"
+puts "\e[1mGame Over! 💀\e[0m"
 exit
-
 

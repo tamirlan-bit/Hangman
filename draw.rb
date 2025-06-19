@@ -1,16 +1,14 @@
 class Draw
   attr_accessor :hangman, :hangman_parts, :play
 
-  def initialize
-    @hangman_parts = ["┌───────┐","O","|","/","\\","/","\\"]
-    @hangman = ["         "," "," "," "," "," "," "]
-    
+  def initialize    
+    reset
   end
 
   def display 
     code_display
     wrong_guess_display
-    puts "Class Play code is :#{@play.code}"
+    # puts "Class Play code is :#{@play.code}"
     puts <<~HANGMAN
 
 ~~ The Hangman Game ~~
@@ -38,6 +36,11 @@ class Draw
 
   def wrong_guess_display
     @wrong_guess = @play.wrong_arr.map { |char| char + " " }.join
+  end
+
+  def reset
+    @hangman_parts = ["┌───────┐","O","|","/","\\","/","\\"]
+    @hangman = ["         "," "," "," "," "," "," "]
   end
 
   def clear_screen

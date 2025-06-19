@@ -1,16 +1,18 @@
 class Play
   attr_accessor :wrong_arr, :correct_arr, :code, :draw
 
-  def initialize (word)
-    @code = word
-    puts "Guess The word!"
-    @correct_arr = []
-    @wrong_arr = []
+  def initialize
+    @code = "temporarly"
+    reset
   end
 
   def get_char
-    puts "Enter Character:"
+    puts "Enter single character:"
     @guess = gets.to_s.chomp.downcase
+  end
+
+  def get_word (word)
+    @code = word
   end
 
   def check_char
@@ -28,6 +30,26 @@ class Play
 
   def win?
     @correct_arr.length == @code_arr.length
-  end    
+  end   
+  
+  def reset    
+    @correct_arr = []
+    @wrong_arr = []
+  end
+
+  def replay (word)
+    puts "\n\nWould you like Another Game?\nPress 'Y' for Yes and 'N' for No"
+    re = gets.chomp.downcase
+    if re == 'y' || re =='yyes' 
+      reset
+      get_word(word)      
+      draw.clear_screen
+      draw.reset
+      draw.display      
+    else
+      puts "\n(ノಠ益ಠ)ノ彡┻━┻\n\n"
+      exit
+    end
+  end
 
 end

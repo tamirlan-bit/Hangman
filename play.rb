@@ -1,8 +1,8 @@
 class Play
   attr_accessor :wrong_arr, :correct_arr, :code, :draw
 
-  def initialize
-    @code = "Hollywood".downcase
+  def initialize (word)
+    @code = word
     puts "Guess The word!"
     @correct_arr = []
     @wrong_arr = []
@@ -25,10 +25,6 @@ class Play
       @wrong_arr.uniq!
     end
   end
-
-  # def get_word
-  #   FILENAME = "google-10000-english-no-swears.txt"
-  # end
 
   def win?
     @correct_arr.length == @code_arr.length

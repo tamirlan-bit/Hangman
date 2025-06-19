@@ -7,8 +7,11 @@ class Play
   end
 
   def get_char
-    puts "Enter single character:"
-    @guess = gets.to_s.chomp.downcase
+    @guess = ""
+    until @guess.match?(/\A[a-zA-Z]\z/)
+      print "Enter a single letter: "
+      @guess = gets.chomp.downcase
+    end
   end
 
   def get_word (word)

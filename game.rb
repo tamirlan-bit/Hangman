@@ -7,11 +7,15 @@ class Game
     reset
   end
 
-  def get_char
+  def get_letter
     @guess = ""
-    until @guess.match?(/\A[a-zA-Z]\z/)
+    until @guess.match?(/\A[a-zA-Z]\z/)     
       print "Enter a new single english letter: "
-      @guess = gets.chomp.downcase
+      input = gets.chomp.downcase
+      if input == 'menu'
+        return :menu
+      end
+      @guess = input
     end
   end
 
@@ -19,7 +23,7 @@ class Game
     @code = word
   end
 
-  def check_char
+  def check_letter
     @code_arr = @code.split("")
     @code_arr.uniq!
     if @code_arr.include?(@guess)

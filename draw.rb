@@ -14,11 +14,13 @@ class Draw
 ~~ The Hangman Game ~~
 
      #{@hangman[0]}      | 
-     │       #{@hangman[1]}      |   Word: #{@secret}"
+     │       #{@hangman[1]}      |   Word: #{@secret}
      │      #{@hangman[3]}#{@hangman[2]}#{@hangman[4]}     |
      │      #{@hangman[5]} #{@hangman[6]}     |   Wrong guesses: \e[1m#{@wrong_guess}\e[0m
      │              |
   ───┴───────       
+
+*To go back enter 'menu' instead of a letter
 
     HANGMAN
   end  
@@ -38,9 +40,10 @@ class Draw
       HANGMAN
     puts "What do you want to do?"
     puts "1. New Game"
-    puts "2. Load Game"
-    puts "3. Save Game"
-    puts "4. Exit"
+    puts "2. Resume Game"
+    puts "3. Load Game"
+    puts "4. Save Game"
+    puts "5. Exit"
     print "> "
   end
 

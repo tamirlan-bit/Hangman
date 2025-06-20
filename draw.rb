@@ -1,14 +1,14 @@
 class Draw
-  attr_accessor :hangman, :hangman_parts, :play
+  attr_accessor :hangman, :hangman_parts, :game
 
-  def initialize    
-    reset
+  def initialize
+    reset    
   end
 
-  def display 
+  def hangman_display 
     code_display
     wrong_guess_display
-    # puts "Class Play code is :#{@play.code}"
+    # puts "Class Game code is :#{@game.code}"
     puts <<~HANGMAN
 
 ~~ The Hangman Game ~~
@@ -23,9 +23,30 @@ class Draw
     HANGMAN
   end  
 
+  def menu_display
+  puts <<~HANGMAN
+
+~~ The Hangman Game ~~
+
+     ┌───────┐      | 
+     │       O      |   Word: SecretWord
+     │      /|\\     |
+     │      / \\     |   Wrong guesses: _ _ _ _ _ _ _
+     │              |
+  ───┴───────       
+
+      HANGMAN
+    puts "What do you want to do?"
+    puts "1. New Game"
+    puts "2. Load Game"
+    puts "3. Save Game"
+    puts "4. Exit"
+    print "> "
+  end
+
   def code_display
-    @secret = @play.code.split("").map do |char| 
-      if !@play.correct_arr.include?(char)
+    @secret =@game.code.split("").map do |char| 
+      if !@game.correct_arr.include?(char)
         char = "-"
       else
         char
@@ -35,7 +56,7 @@ class Draw
   end
 
   def wrong_guess_display
-    @wrong_guess = @play.wrong_arr.map { |char| char + " " }.join
+    @wrong_guess =@game.wrong_arr.map { |char| char + " " }.join
   end
 
   def reset

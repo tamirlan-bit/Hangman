@@ -1,6 +1,7 @@
-class Play
+class Game
   attr_accessor :wrong_arr, :correct_arr, :code, :draw
-
+  FILENAME = "google-10000-english-no-swears.txt"
+  
   def initialize
     @code = "temporarly"
     reset
@@ -9,7 +10,7 @@ class Play
   def get_char
     @guess = ""
     until @guess.match?(/\A[a-zA-Z]\z/)
-      print "Enter a single letter: "
+      print "Enter a new single english letter: "
       @guess = gets.chomp.downcase
     end
   end
@@ -40,19 +41,13 @@ class Play
     @wrong_arr = []
   end
 
-  def replay (word)
-    puts "\n\nWould you like Another Game?\nPress 'Y' for Yes and 'N' for No"
-    re = gets.chomp.downcase
-    if re == 'y' || re =='yyes' 
-      reset
-      get_word(word)      
-      draw.clear_screen
-      draw.reset
-      draw.display      
+  def random_word
+    if File.exist?(FILENAME)
+      words = File.readlines(FILENAME).map(&:chomp)
+      selected = words.select { |word| word.size > 5 && word.size < 12}
+      selected.sample    
     else
-      puts "\n(ノಠ益ಠ)ノ彡┻━┻\n\n"
-      exit
+      puts "words file wasn't found. Using fallback"
     end
   end
-
 end

@@ -1,15 +1,20 @@
 require_relative 'manager'
 require_relative 'game'
 require_relative 'draw'
+require 'json'
 
-game = Game.new 
+game = Game.new
 draw = Draw.new
-manager = Manager.new(game, draw)
-game.draw = draw
-draw.game = game
+manager = Manager.new
 
+game.draw = draw
+game.manager = manager
+draw.game = game
+manager.game = game
+manager.draw = draw
 
 loop do
+  draw.clear_screen
   draw.menu_display
   choice = gets.chomp
   case choice

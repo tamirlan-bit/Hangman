@@ -71,6 +71,11 @@ class Draw
     system("clear") || system("cls")
   end
 
+  def refresh_hangman
+    clear_screen
+    hangman_display
+  end
+
 end
    
 

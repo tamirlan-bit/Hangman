@@ -1,84 +1,57 @@
 class Manager
    attr_accessor :game, :draw
-  # need to save: draw.hangman, game.code, game.wrong_arr, game.correct_arr
-
-  def initialize (game, draw)
-    draw.clear_screen
+   
+  def initialize    
     @game = game
     @draw = draw
-  end   
+  end
+
+  def save_stack
+    p game.code
+    p game.correct_arr
+    p game.wrong_arr
+    p draw.hangman    
+    temp = gets
+  end
   
   def resume_game
     draw.clear_screen
     puts "Game Resumed"
-    draw.hangman_display
-    while game.wrong_arr.size < 7
-      res = game.get_letter
-        if res == :menu
-          draw.clear_screen
-          return
-        end
-      game.check_letter
-      draw.clear_screen
-      draw.hangman_display
-     if game.win?
-        draw.clear_screen
-        draw.hangman_display
-        puts "\e[1mYou WON! The secret word was indeed #{game.code}🎉🎉\e[0m"
-        replay(game.random_word)
-      end  
-    end
-    puts "\e[1mGame Over! 💀\e[0m"
-    puts "The secret word was \e[1m#{game.code}\e[0m"
-    replay(game.random_word)
+    game.game_turns
   end
 
   def save_game
-    draw.clear_screen
-    puts "Save Game selected"
+    File.write("code.json", game.code.to_json)
+    File.write("correct_arr.json", game.correct_arr.to_json)
+    File.write("wrong_arr.json", game.wrong_arr.to_json)
+    File.write("hangman.json", draw.hangman.to_json)
+    puts "Game saved"
   end
-
+  
   def load_game
-    draw.clear_screen
-    puts "Load Game selected"
+    game.code = JSON.parse(File.read("code.json"))
+    game.correct_arr = JSON.parse(File.read("correct_arr.json"))
+    game.wrong_arr = JSON.parse(File.read("wrong_arr.json"))
+    draw.hangman = JSON.parse(File.read("hangman.json"))
+    puts "Game Loaded"
   end
 
   def new_game
-    draw.clear_screen
-    draw.reset
-    game.reset    
-    game.get_word(game.random_word)    
-    draw.hangman_display
-    while game.wrong_arr.size < 7
-      res = game.get_letter
-        if res == :menu
-          draw.clear_screen
-          return
-        end
-      game.check_letter
+    loop do
       draw.clear_screen
-      draw.hangman_display
-     if game.win?
-        draw.clear_screen
-        draw.hangman_display
-        puts "\e[1mYou WON! The secret word was indeed #{game.code}🎉🎉\e[0m"
-        replay(game.random_word)
-      end  
+      draw.reset
+      game.reset    
+      game.get_word(game.random_word)
+      result = game.game_turns
+      break if result == :menu
     end
-    puts "\e[1mGame Over! 💀\e[0m"
-    puts "The secret word was \e[1m#{game.code}\e[0m"
-    replay(game.random_word)
   end
    
-  def replay(word)
-    puts "\n\nWould you like Another Game?\n"
-    re = gets.chomp.downcase
-    if re == 'y' || re =='yes' 
-      new_game
-    else
-      draw.clear_screen
-      return
-    end
+  def replay
+    print "\nPlay again? "
+    replay_choice = gets.chomp.downcase
+    return :restart if replay_choice == 'y' || replay_choice =='yes'
+    return :menu
   end
 
 end

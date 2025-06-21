@@ -39,7 +39,7 @@ class Game
 
   def game_turns
     draw.hangman_display
-    while wrong_arr.size < 20
+    while wrong_arr.size < 7
       letters = get_letter
         if letters == :menu
           draw.refresh_hangman

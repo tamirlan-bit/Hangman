@@ -21,19 +21,25 @@ class Manager
   end
 
   def save_game
-    File.write("code.json", game.code.to_json)
-    File.write("correct_arr.json", game.correct_arr.to_json)
-    File.write("wrong_arr.json", game.wrong_arr.to_json)
-    File.write("hangman.json", draw.hangman.to_json)
+    data = {
+      code: game.code,
+      correct_arr: game.correct_arr,
+      wrong_arr: game.wrong_arr,
+      hangman: draw.hangman
+    }
+    File.write("savegame.json", JSON.pretty_generate(data))
     puts "Game saved"
+    draw.pause
   end
-  
+
   def load_game
-    game.code = JSON.parse(File.read("code.json"))
-    game.correct_arr = JSON.parse(File.read("correct_arr.json"))
-    game.wrong_arr = JSON.parse(File.read("wrong_arr.json"))
-    draw.hangman = JSON.parse(File.read("hangman.json"))
+    data = JSON.parse(File.read("savegame.json"))
+    game.code = data["code"]
+    game.correct_arr = data["correct_arr"]
+    game.wrong_arr = data["wrong_arr"]
+    draw.hangman = data["hangman"]
     puts "Game Loaded"
+    draw.pause
   end
 
   def new_game

@@ -11,16 +11,16 @@ class Draw
     # puts "Class Game code is :#{@game.code}"
     puts <<~HANGMAN
 
-~~ The Hangman Game ~~
+   ~ The Hangman Game ~
 
-     #{@hangman[0]}      | 
-     │       #{@hangman[1]}      |   Word: #{@secret}
-     │      #{@hangman[3]}#{@hangman[2]}#{@hangman[4]}     |
-     │      #{@hangman[5]} #{@hangman[6]}     |   Wrong guesses: \e[1m#{@wrong_guess}\e[0m
-     │              |
-  ───┴───────       
+      #{@hangman[0]}      | 
+      │       #{@hangman[1]}      |   Word: #{@secret}
+      │      #{@hangman[3]}#{@hangman[2]}#{@hangman[4]}     |
+      │      #{@hangman[5]} #{@hangman[6]}     |   Wrong guesses: \e[1m#{@wrong_guess}\e[0m
+      │              |
+   ───┴───────       
 
-*To go back enter 'menu' instead of a letter
+   *To go back enter 'menu' instead of a letter
 
     HANGMAN
   end  
@@ -28,7 +28,7 @@ class Draw
   def menu_display
   puts <<~HANGMAN
 
-~~ The Hangman Game ~~
+   ~ The Hangman Game ~
 
      ┌───────┐      | 
      │       O      |   Word: SecretWord
@@ -38,13 +38,13 @@ class Draw
   ───┴───────       
 
       HANGMAN
-    puts "What do you want to do?"
-    puts "1. New Game"
-    puts "2. Resume Game"
-    puts "3. Load Game"
-    puts "4. Save Game"
-    puts "5. Exit"
-    print "> "
+    puts " What do you want to do?"
+    puts " 1. New Game"
+    puts " 2. Resume Game"
+    puts " 3. Load Game"
+    puts " 4. Save Game"
+    puts " 5. Exit"
+    print " > "
   end
 
   def code_display
@@ -74,6 +74,11 @@ class Draw
   def refresh_hangman
     clear_screen
     hangman_display
+  end
+
+  def pause
+    puts "\n Press ENTER to continue..."
+    gets
   end
 
 end
